@@ -3,6 +3,10 @@ import Layout from "../MainLayout/Layout";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home";
 import CategoryBooks from "../Pages/CategoryBooks/CategoryBooks";
+import Login from "../Pages/Login/Login";
+import Register from "../Pages/Register/Register";
+import AddBooks from "../Pages/AddBooks/AddBooks";
+import PrivateRoute from "./PrivateRoute";
 const LlibraryRoute = createBrowserRouter([
     {
       path: "/",
@@ -15,8 +19,20 @@ const LlibraryRoute = createBrowserRouter([
         },
         {
           path: "/booktype/:booktype", 
-          element:<CategoryBooks></CategoryBooks>
-        }
+          element:<PrivateRoute> <CategoryBooks></CategoryBooks> </PrivateRoute> 
+        },
+        {
+          path: "login", 
+          element:<Login></Login>
+        },
+        {
+          path: "register", 
+          element:<Register></Register>
+        },
+        {
+          path: "addBooks", 
+          element:<PrivateRoute> <AddBooks></AddBooks> </PrivateRoute>
+        },
       ]
     },
   ]);
