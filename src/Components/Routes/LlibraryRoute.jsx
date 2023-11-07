@@ -10,6 +10,7 @@ import PrivateRoute from "./PrivateRoute";
 import BookDetails from "../Pages/CategoryBooks/BookDetails";
 import BookRead from "../Pages/CategoryBooks/BookRead";
 import UpdateBook from "../Pages/UpdateBook/UpdateBook";
+import AllBooks from "../Pages/AllBooks/allBooks";
 const LlibraryRoute = createBrowserRouter([
     {
       path: "/",
@@ -34,6 +35,11 @@ const LlibraryRoute = createBrowserRouter([
           path: "/bookRead/:id", 
           loader:()=>fetch('http://localhost:5000/allbooks'),
           element:<PrivateRoute> <BookRead></BookRead> </PrivateRoute> 
+        },
+        {
+          path: "/allBooks", 
+          loader:()=>fetch('http://localhost:5000/allbooks'),
+          element:<PrivateRoute> <AllBooks></AllBooks> </PrivateRoute> 
         },
         {
           path: "/updatebook/:id", 
