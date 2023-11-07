@@ -9,7 +9,7 @@ const booktype = () => {
             imageUrl: "https://i.ibb.co/xgGt6Sv/attachment-90784069.jpg"
         },
         {   index:2,
-            booktype: "Mystry",
+            booktype: "Mystery",
             imageUrl: "https://i.ibb.co/YLB4s19/mt-1519-home-img-9.jpg"
         },
         {   index:3,
@@ -17,7 +17,7 @@ const booktype = () => {
             imageUrl: "https://i.ibb.co/7QCzHw8/6a0befa2-e1c4-498d-8979-6e9f890aa4dd.jpg"
         },
         {   index:4,
-            booktype: "history",
+            booktype: "History",
             imageUrl: "https://i.ibb.co/k93zZn2/canva-brown-scrapbook-clasic-project-history-cover-a4-document-n-LJ7-SF0-X-k.jpg"
         },
     ]
