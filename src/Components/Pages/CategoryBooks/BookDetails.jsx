@@ -24,12 +24,19 @@ const BookDetails = () => {
         const currentName = user?.displayName
         const updatedBQuantity = bquantity > 0 ? bquantity - 1 : 0; 
         const borrowBook = {
-            _id,
+            id,
             currentEmail,
             currentName,
             borrowDate,
             quantity: updatedBQuantity,
         }
+        const updatequantity={
+            quantity
+        }
+        const existingBook = details.find((detail) => detail._id === id);
+        console.log('exist',existingBook)
+        if(!existingBook._id){
+
         fetch('http://localhost:5000/borrowbook',{
             method:'POST',
             headers:{
@@ -44,7 +51,17 @@ const BookDetails = () => {
 
                 if (bquantity > 0) {
                     setbquantity(bquantity - 1);
-                }
+                fetch(`http://localhost:5000/allbooks/${id}`,{
+                    method:'PATCH',
+                    headers:{
+                        'content-type':'application/json'
+                    },
+                    body:JSON.stringify(updatequantity)
+                })
+                .then(res=>res.json())
+                .then(data=>{
+                    console.log(data)
+                })
                 // swal({
                 //     title: "Welcome!",
                 //     text: "You have saved your borrowed date !",
@@ -52,7 +69,13 @@ const BookDetails = () => {
                 //     button: "Aww yesss!",
                 // });
             }
+        }
+
         })
+    }else{
+        alert('already booked')
+    }
+
     };
 
     return (
