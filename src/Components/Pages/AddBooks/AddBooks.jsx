@@ -16,7 +16,7 @@ const AddBooks = () => {
             name, image, quantity, author, category, rating, description
         }
         console.log(newBook)
-        fetch('http://localhost:5000/allbooks',{
+        fetch('http://localhost:5000/allbooks',{credentials:'include'},{
             method:'POST',
             headers:{
                 'content-type':'application/json'
