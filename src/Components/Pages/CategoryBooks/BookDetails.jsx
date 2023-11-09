@@ -1,41 +1,66 @@
-import React, { useState,useContext } from 'react';
+import React, { useState,useContext, useEffect } from 'react';
 import { Link, useLoaderData, useParams } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
-// import swal from 'sweetalert';
-
+import swal from 'sweetalert';
+import './swal.css'
 const BookDetails = () => {
     const {user} = useContext(AuthContext)
     console.log(user?.email)
+    const email=user?.email
     console.log(user?.displayName)
+
     const { id } = useParams();
+    console.log(id)
     const details = useLoaderData();
     const showDetailsBook = details?.find((detail) => detail._id === id);
-    const { image, category, _id,quantity } = showDetailsBook;
+    const { image, category, _id,quantity,name } = showDetailsBook;
     console.log(showDetailsBook)
     const[bquantity,setbquantity] = useState(quantity)
     const [borrowDate, setBorrowDate] = useState('');
+    const [borrowbookId,setborrowbookId]=useState([])
     const handleBorrow = () => {
         document.getElementById('my_modal_5').showModal(); // Show the modal when the button is clicked
     };
-
+    useEffect(() => {
+        fetch('http://localhost:5000/borrowbook')
+            .then(res => res.json())
+            .then(data => {
+                setborrowbookId(data); // Corrected the way to set state
+                console.log(data); // Logging the data received from the fetch
+            })
+            
+    }, []); 
+    console.log(borrowbookId)
+    const filteremail = borrowbookId?.find((filteremail)=>filteremail.currentEmail===email);
+    const filterid = borrowbookId?.find((filterid)=>filterid.orginalid===id);
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         const currentEmail = user?.email
         const currentName = user?.displayName
-        const updatedBQuantity = bquantity > 0 ? bquantity - 1 : 0; 
+        // const updatedBQuantity = bquantity > 0 ? bquantity - 1 : 0; 
+        const updatequantity={
+            quantity:quantity-1 
+        }
         const borrowBook = {
-            id,
+            image,
+            name,
+            category,
+            orginalid:id,
             currentEmail,
             currentName,
             borrowDate,
-            quantity: updatedBQuantity,
+            // quantity: updatedBQuantity,
+            quantity: updatequantity,
         }
-        const updatequantity={
-            quantity
-        }
-        const existingBook = details.find((detail) => detail._id === id);
-        console.log('exist',existingBook)
-        if(!existingBook._id){
+        // const updatequantity={
+        //     quantity:quantity-1 
+        // }
+        // <0 ? 0 : quantity-1
+        console.log(updatequantity)
+        // const existingBook = details.find((detail) => detail._id === id);
+        // console.log('exist',existingBook)
+       if(!(filteremail && filterid)){
 
         fetch('http://localhost:5000/borrowbook',{
             method:'POST',
@@ -62,19 +87,25 @@ const BookDetails = () => {
                 .then(data=>{
                     console.log(data)
                 })
-                // swal({
-                //     title: "Welcome!",
-                //     text: "You have saved your borrowed date !",
-                //     icon: "success",
-                //     button: "Aww yesss!",
-                // });
+                swal({
+                    title: "Welcome!",
+                    text: "You have saved your borrowed date !",
+                    icon: "success",
+                    button: "Aww yesss!",
+                    closeOnClickOutside: false,
+                    closeOnEsc: false,
+                    customClass: {
+                        popup: 'sweetalert-popup',
+                    },
+                });
             }
         }
 
         })
     }else{
-        alert('already booked')
+        alert('wrong')
     }
+    
 
     };
 
@@ -84,7 +115,7 @@ const BookDetails = () => {
             <p className='text-center text-3xl mt-5'>{category}</p>
             <p className='text-center text-3xl mt-5'>Available:{bquantity}</p>
             <div className='justify-center gap-10 md:gap-64 mt-5 flex mx-auto'>
-            <Link>
+            
             <button
                     onClick={() => handleBorrow(_id)}
                     disabled={bquantity === 0}
@@ -92,7 +123,6 @@ const BookDetails = () => {
                     >
                     Borrow
                 </button>
-                    </Link>
                 <Link to={`/bookRead/${_id}`}>
                     <button className='bg-success p-4 rounded-lg text-white text-xl'>Read..</button>
                 </Link>

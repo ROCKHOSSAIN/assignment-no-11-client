@@ -36,6 +36,7 @@ const Register = () => {
                 displayName:name, photoURL: photoURL
               }).then((result) => {
                 // Profile updated!
+                console.log(result)
                 // ...
               }).catch((error) => {
                console.error(error);

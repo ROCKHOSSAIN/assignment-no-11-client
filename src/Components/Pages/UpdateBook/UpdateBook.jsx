@@ -28,7 +28,7 @@ const UpdateBooks = () => {
         .then(res=>res.json())
         .then(data=>{
             console.log(data)
-            if(data.modifiedCount===1){
+            if(data.matchedCount===1){
                 Swal.fire({
                     title: "Well Done!",
                     text: "You have updated book info!!",
