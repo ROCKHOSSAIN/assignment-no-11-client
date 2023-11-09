@@ -20,7 +20,13 @@ const BookDetails = () => {
     const [returnDate, setreturnDate] = useState('');
     const [borrowbookId,setborrowbookId]=useState([])
     const handleBorrow = () => {
-        document.getElementById('my_modal_5').showModal(); // Show the modal when the button is clicked
+        
+        const filteremailid = borrowbookId?.find((filteremail)=>filteremail.currentEmail===email && filteremail.orginalid===id);
+        if(!filteremailid){
+
+            document.getElementById('my_modal_5').showModal(); 
+        }
+    // Show the modal when the button is clicked
     };
     useEffect(() => {
         fetch('http://localhost:5000/borrowbook')
@@ -32,8 +38,7 @@ const BookDetails = () => {
             
     }, []); 
     console.log(borrowbookId)
-    const filteremail = borrowbookId?.find((filteremail)=>filteremail.currentEmail===email);
-    const filterid = borrowbookId?.find((filterid)=>filterid.orginalid===id);
+    const filteremailid = borrowbookId?.find((filteremail)=>filteremail.currentEmail===email && filteremail.orginalid===id);
     
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -63,7 +68,7 @@ const BookDetails = () => {
         console.log(updatequantity)
         // const existingBook = details.find((detail) => detail._id === id);
         // console.log('exist',existingBook)
-       if(!(filteremail && filterid)){
+       if(!(filteremailid)){
 
         fetch('http://localhost:5000/borrowbook',{
             method:'POST',

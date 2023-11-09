@@ -5,7 +5,7 @@ import  { useState } from 'react';
 const ShowBorrowBook = ({ data }) => {
     const { image, name, category, borrowDate, returnDate,orginalid,quantity,_id } = data
     console.log(quantity)
-const [carts, setcarts] = useState(data)
+const [carts, setCarts] = useState(data)
 
 
     const handleReturn=(id)=>{
@@ -42,8 +42,9 @@ const [carts, setcarts] = useState(data)
 
                         if (Array.isArray(carts)) {
                             const remainingUsers = carts.filter(user => user._id !== _id);
-                            setcarts(remainingUsers);
+                            setCarts(remainingUsers);
                           }
+                          
                       
                     
                 })
