@@ -1,60 +1,15 @@
 import React from 'react';
 import Swal from 'sweetalert';
-import  { useState,useEffect } from 'react';
+import  { useState } from 'react';
 
 const ShowBorrowBook = ({ data }) => {
     const { image, name, category, borrowDate, returnDate,orginalid,quantity,_id } = data
     console.log(quantity)
-const [returnState,setReturnState]=useState(null)
 const [carts, setcarts] = useState(data)
 
 
     const handleReturn=(id)=>{
-        // const updatequantity={
-        //     quantity:quantity+1 
-        // }
-        // const returnBook = {
-           
-        //     quantity: updatequantity.quantity,
-        // }
 
-        //return/delete
-
-            // Swal.fire({
-            //     title: 'Are you sure?',
-            //     text: "You won't be able to revert this!",
-            //     icon: 'warning',
-            //     showCancelButton: true,
-            //     confirmButtonColor: '#3085d6',
-            //     cancelButtonColor: '#d33',
-            //     confirmButtonText: 'Yes, return it!'
-            // }).then((result) => {
-            //     if (result.isConfirmed) {
-        
-        
-                    // fetch(`http://localhost:5000/borrowbook/${id}`, {
-                    //     method: 'DELETE'
-                    // })
-                    //     .then(res => res.json())
-                    //     .then(data => {
-                    //         console.log(data);
-                    //         if (data.deletedCount > 0) {
-        
-                    //             const remainingUsers = carts.filter(user => user._id !== _id)
-                    //             setcarts(remainingUsers)
-                    //             Swal.fire(
-                    //                 'Returned!',
-                    //                 'You have returned your book',
-                    //                 'success'
-                    //             )
-                                
-                    //         }
-                    //     })
-        
-            //     }
-            // })
-    
-        //
 
        fetch('http://localhost:5000/allbooks')
        .then(res=>res.json())
@@ -78,6 +33,21 @@ const [carts, setcarts] = useState(data)
         .then(res=>res.json())
         .then(data=>{
             console.log(data)
+            fetch(`http://localhost:5000/borrowbook/${_id}`, {
+                method: 'DELETE'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+
+                        if (Array.isArray(carts)) {
+                            const remainingUsers = carts.filter(user => user._id !== _id);
+                            setcarts(remainingUsers);
+                          }
+                      
+                    
+                })
+
         })
         Swal({
             title: "Welcome!",
