@@ -1,8 +1,8 @@
-import React, { useState,useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLoaderData, useParams } from 'react-router-dom';
-import { AuthContext } from '../../Provider/AuthProvider';
 import swal from 'sweetalert';
-import './swal.css'
+import { AuthContext } from '../../Provider/AuthProvider';
+import './swal.css';
 const BookDetails = () => {
     const {user} = useContext(AuthContext)
     console.log(user?.email)
@@ -29,7 +29,7 @@ const BookDetails = () => {
     // Show the modal when the button is clicked
     };
     useEffect(() => {
-        fetch('http://localhost:5000/borrowbook')
+        fetch('https://assignment-no-11-server-snowy.vercel.app/borrowbook')
             .then(res => res.json())
             .then(data => {
                 setborrowbookId(data); // Corrected the way to set state
@@ -70,7 +70,7 @@ const BookDetails = () => {
         // console.log('exist',existingBook)
        if(!(filteremailid)){
 
-        fetch('http://localhost:5000/borrowbook',{
+        fetch('https://assignment-no-11-server-snowy.vercel.app/borrowbook',{
             method:'POST',
             headers:{
                 'content-type':'application/json'
@@ -84,7 +84,7 @@ const BookDetails = () => {
 
                 if (bquantity > 0) {
                     setbquantity(bquantity - 1);
-                fetch(`http://localhost:5000/allbooks/${id}`,{
+                fetch(`https://assignment-no-11-server-snowy.vercel.app/allbooks/${id}`,{
                     method:'PATCH',
                     headers:{
                         'content-type':'application/json'

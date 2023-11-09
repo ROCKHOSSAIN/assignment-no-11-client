@@ -1,18 +1,18 @@
-import {createBrowserRouter} from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Layout from "../MainLayout/Layout";
-import ErrorPage from "../Pages/ErrorPage/ErrorPage";
-import Home from "../Pages/Home/Home";
-import CategoryBooks from "../Pages/CategoryBooks/CategoryBooks";
-import Login from "../Pages/Login/Login";
-import Register from "../Pages/Register/Register";
 import AddBooks from "../Pages/AddBooks/AddBooks";
-import PrivateRoute from "./PrivateRoute";
-import BookDetails from "../Pages/CategoryBooks/BookDetails";
-import BookRead from "../Pages/CategoryBooks/BookRead";
-import UpdateBook from "../Pages/UpdateBook/UpdateBook";
 import AllBooks from "../Pages/AllBooks/allBooks";
 import BorrowBook from "../Pages/BorrowBook/BorrowBook";
+import BookDetails from "../Pages/CategoryBooks/BookDetails";
+import BookRead from "../Pages/CategoryBooks/BookRead";
+import CategoryBooks from "../Pages/CategoryBooks/CategoryBooks";
 import Contact from "../Pages/Contact/Contact";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import Home from "../Pages/Home/Home";
+import Login from "../Pages/Login/Login";
+import Register from "../Pages/Register/Register";
+import UpdateBook from "../Pages/UpdateBook/UpdateBook";
+import PrivateRoute from "./PrivateRoute";
 const LlibraryRoute = createBrowserRouter([
     {
       path: "/",
@@ -25,32 +25,32 @@ const LlibraryRoute = createBrowserRouter([
         },
         {
           path: "/booktype/:booktype", 
-          loader:()=>fetch('http://localhost:5000/allbooks'),
+          loader:()=>fetch('https://assignment-no-11-server-snowy.vercel.app/allbooks'),
           element:<PrivateRoute> <CategoryBooks></CategoryBooks> </PrivateRoute> 
         },
         {
           path: "/bookDetails/:id", 
-          loader:()=>fetch('http://localhost:5000/allbooks'),
+          loader:()=>fetch('https://assignment-no-11-server-snowy.vercel.app/allbooks'),
           element:<PrivateRoute> <BookDetails></BookDetails> </PrivateRoute> 
         },
         {
           path: "/bookRead/:id", 
-          loader:()=>fetch('http://localhost:5000/allbooks'),
+          loader:()=>fetch('https://assignment-no-11-server-snowy.vercel.app/allbooks'),
           element:<PrivateRoute> <BookRead></BookRead> </PrivateRoute> 
         },
         {
           path: "/allBooks", 
-          loader:()=>fetch('http://localhost:5000/allbooks'),
+          loader:()=>fetch('https://assignment-no-11-server-snowy.vercel.app/allbooks'),
           element:<PrivateRoute> <AllBooks></AllBooks> </PrivateRoute> 
         },
         {
           path: "/borrowedBooks", 
-          loader:()=>fetch('http://localhost:5000/borrowbook'),
+          loader:()=>fetch('https://assignment-no-11-server-snowy.vercel.app/borrowbook'),
           element:<PrivateRoute> <BorrowBook></BorrowBook> </PrivateRoute> 
         },
         {
           path: "/updatebook/:id", 
-          loader:({params})=>fetch(`http://localhost:5000/allbooks/${params.id}`),
+          loader:({params})=>fetch(`https://assignment-no-11-server-snowy.vercel.app/allbooks/${params.id}`),
           element:<PrivateRoute> <UpdateBook></UpdateBook> </PrivateRoute> 
         },
         {

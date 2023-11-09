@@ -1,7 +1,7 @@
-import {createContext, useState,useEffect} from 'react';
-import app from '../firebase/firebase.config';
-import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import axios from 'axios';
+import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { createContext, useEffect, useState } from 'react';
+import app from '../firebase/firebase.config';
 export  const AuthContext = createContext(null)
 const AuthProvider = ({children}) => {
     const auth = getAuth(app);
@@ -43,13 +43,13 @@ const AuthProvider = ({children}) => {
             setloading(false)
             setUser(currentUser);
             if(currentUser){
-                axios.post('http://localhost:5000/jwt',loggedUser,{withCredentials:true})
+                axios.post('https://assignment-no-11-server-snowy.vercel.app/jwt',loggedUser,{withCredentials:true})
                 .then(res=>{
                     console.log('token response',res.data)
                 })
             }
             else{
-                axios.post('http://localhost:5000/logout',loggedUser,{withCredentials:true})
+                axios.post('https://assignment-no-11-server-snowy.vercel.app/logout',loggedUser,{withCredentials:true})
                 .then(res=>{
                     console.log(res.data)
                 })

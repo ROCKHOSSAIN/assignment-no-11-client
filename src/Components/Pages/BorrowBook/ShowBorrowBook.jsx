@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Swal from 'sweetalert';
-import  { useState } from 'react';
 
 const ShowBorrowBook = ({ data }) => {
     const { image, name, category, borrowDate, returnDate,orginalid,quantity,_id } = data
@@ -11,7 +10,7 @@ const [carts, setCarts] = useState(data)
     const handleReturn=(id)=>{
 
 
-       fetch('http://localhost:5000/allbooks')
+       fetch('https://assignment-no-11-server-snowy.vercel.app/allbooks')
        .then(res=>res.json())
        .then(data=>{
         const returnbook= data?.find(data=>data._id===orginalid)
@@ -23,7 +22,7 @@ const [carts, setCarts] = useState(data)
         //     }
         //     const updatequantity=upquantity.quantity
         //     console.log(updatequantity)
- fetch(`http://localhost:5000/allbooks/${id}`,{
+ fetch(`https://assignment-no-11-server-snowy.vercel.app/allbooks/${id}`,{
             method:'PATCH',
             headers:{
                 'content-type':'application/json'
@@ -33,7 +32,7 @@ const [carts, setCarts] = useState(data)
         .then(res=>res.json())
         .then(data=>{
             console.log(data)
-            fetch(`http://localhost:5000/borrowbook/${_id}`, {
+            fetch(`https://assignment-no-11-server-snowy.vercel.app/borrowbook/${_id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())
