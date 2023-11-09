@@ -12,6 +12,7 @@ import BookRead from "../Pages/CategoryBooks/BookRead";
 import UpdateBook from "../Pages/UpdateBook/UpdateBook";
 import AllBooks from "../Pages/AllBooks/allBooks";
 import BorrowBook from "../Pages/BorrowBook/BorrowBook";
+import Contact from "../Pages/Contact/Contact";
 const LlibraryRoute = createBrowserRouter([
     {
       path: "/",
@@ -59,6 +60,10 @@ const LlibraryRoute = createBrowserRouter([
         {
           path: "register", 
           element:<Register></Register>
+        },
+        {
+          path: "contact", 
+          element:<Contact></Contact>
         },
         {
           path: "addBooks", 
