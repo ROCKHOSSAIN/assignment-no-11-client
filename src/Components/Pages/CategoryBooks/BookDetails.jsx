@@ -17,6 +17,7 @@ const BookDetails = () => {
     console.log(showDetailsBook)
     const[bquantity,setbquantity] = useState(quantity)
     const [borrowDate, setBorrowDate] = useState('');
+    const [returnDate, setreturnDate] = useState('');
     const [borrowbookId,setborrowbookId]=useState([])
     const handleBorrow = () => {
         document.getElementById('my_modal_5').showModal(); // Show the modal when the button is clicked
@@ -42,6 +43,7 @@ const BookDetails = () => {
         const updatequantity={
             quantity:quantity-1 
         }
+        // const updatequantity=parseInt(quantity-1) 
         const borrowBook = {
             image,
             name,
@@ -50,8 +52,9 @@ const BookDetails = () => {
             currentEmail,
             currentName,
             borrowDate,
+            returnDate,
             // quantity: updatedBQuantity,
-            quantity: updatequantity,
+            quantity: updatequantity.quantity,
         }
         // const updatequantity={
         //     quantity:quantity-1 
@@ -132,14 +135,33 @@ const BookDetails = () => {
             <dialog id='my_modal_5' className='modal modal-bottom sm:modal-middle'>
                 <div className='modal-box'>
                     <form onSubmit={handleSubmit}>
-                        <input
+                        <div className='flex flex-col gap-10'>
+
+                        <span>Borrow Date: 
+                            
+                            <input
                             type='date'
                             id='borrowDate'
                             value={borrowDate}
                             onChange={(e) => setBorrowDate(e.target.value)}
                             required
                         />
-                        <button type='submit' className='btn'>
+                        </span>
+                       
+                       <span>Return Date:
+                        
+                         <input
+                            type='date'
+                            id='returnDate'
+                            value={returnDate}
+                            onChange={(e) => setreturnDate(e.target.value)}
+                            required
+                        />
+                       </span>
+
+                        </div>
+
+                        <button type='submit' className='btn mt-10'>
                             Submit
                         </button>
                     </form>

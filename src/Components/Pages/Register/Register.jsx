@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
 import { getAuth, updateProfile } from 'firebase/auth';
 import app from '../../firebase/firebase.config';
+import Swal from 'sweetalert';
 
 const Register = () => {
     const { createUser } = useContext(AuthContext)
@@ -30,6 +31,13 @@ const Register = () => {
         }
         createUser(email,password)
         .then(result=>{
+            Swal({
+                title: "Welcome!",
+                text: "You have created a new account !",
+                icon: "success",
+                button: "Aww yesss!",
+               
+            });
             form.reset()
             // console.log(result.user)
             updateProfile(auth.currentUser, {

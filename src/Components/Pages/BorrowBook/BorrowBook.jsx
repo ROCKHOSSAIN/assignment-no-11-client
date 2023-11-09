@@ -14,7 +14,7 @@ const BorrowBook = () => {
     
   
     return (
-        <div>
+        <div className="grid grid-cols-1 md:grid-cols-4 container mx-auto mt-4 md:mt-10">
             
         {
             filteremail?.map((data)=><ShowBorrowBook key={data._id} data={data}></ShowBorrowBook>)
