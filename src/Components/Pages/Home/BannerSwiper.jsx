@@ -23,7 +23,7 @@ const BannerSwiper = () => {
             <SwiperSlide>
                 <img src="https://i.ibb.co/WsPv277/pexels-rafael-cosquiere-2041540.jpg" className='w-full h-[250px]  md:h-[900px]' alt="" />
                 <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-2/3 md:top-1/2">
-                    <h1 className='absolute bottom-0  md:left-20 text-xl md:text-6xl font-bold font-poppins text-white w-2/3 md:w-1/3'>A haven of wisdom where minds flourish, and ideas <span className='text-yellow-300'>Bloom</span></h1>
+                    <h1 className='absolute bottom-0  md:left-20 text-xl md:text-6xl font-bold font-poppins text-white w-2/3 md:w-1/3'>A Haven of wisdom where minds flourish, and ideas <span className='text-yellow-300'>Bloom</span></h1>
 
                 </div>
             </SwiperSlide>
